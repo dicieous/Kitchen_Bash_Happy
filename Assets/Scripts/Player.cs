@@ -22,14 +22,14 @@ public class Player : MonoBehaviour,IkitchenObjectParent
 
     private Vector3 lastInteraction;
 
-    private ClearCounter SelectedCounter;
+    private BaseCounter SelectedCounter;
 
     private KitchenObjects kitchenObject;
 
     public event EventHandler<OnselectedCounterChangedEventArgs> OnselectedCounterChanged;
     public class OnselectedCounterChangedEventArgs : EventArgs
     {
-        public ClearCounter selectedCounter;
+        public BaseCounter selectedCounter;
     }
 
     private void Awake ()
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour,IkitchenObjectParent
         {
             Debug.LogError("There is more than one player");
         }
-           Instance = this; 
+        Instance = this; 
     }
 
     private void Start ()
@@ -76,11 +76,11 @@ public class Player : MonoBehaviour,IkitchenObjectParent
         float interactionDistance = 2f;
         if(Physics.Raycast(transform.position, lastInteraction, out RaycastHit raycasthit, interactionDistance,CounterlayerMask))
         {
-            if(raycasthit.transform.TryGetComponent(out ClearCounter clearCounter)){
+            if(raycasthit.transform.TryGetComponent(out BaseCounter baseCounter)){
                 //Has ClearCounter
-                if(clearCounter != SelectedCounter)
+                if(baseCounter != SelectedCounter)
                 {
-                   SetSelectedCounter(clearCounter);
+                   SetSelectedCounter(baseCounter);
                 }
             } else
             {
@@ -149,7 +149,7 @@ public class Player : MonoBehaviour,IkitchenObjectParent
         return isWalking;
     }
 
-    private void SetSelectedCounter(ClearCounter selectedCounter)
+    private void SetSelectedCounter(BaseCounter selectedCounter)
     {
         this.SelectedCounter = selectedCounter;
         OnselectedCounterChanged?.Invoke(this, new OnselectedCounterChangedEventArgs
