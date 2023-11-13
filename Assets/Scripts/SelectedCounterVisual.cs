@@ -31,6 +31,7 @@ public class SelectedCounterVisual : MonoBehaviour
         foreach (var visualObj in visualGameObjectArray)
         {
             visualObj.SetActive(true);
+            
         }
         
     }
