@@ -1,17 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Video;
 
-public class CuttingCounter : BaseCounter
+public class CuttingCounter : BaseCounter,IHasProgress
 {
-    public event EventHandler <OnProgressChangedEventArgs> OnCuttingProgressChanged;
+    public event EventHandler <IHasProgress.OnProgressChangedEventArgs> OnCuttingProgressChanged;
     
-    public class OnProgressChangedEventArgs : EventArgs
-    {
-        public float progressNormalized;
-    }
 
     public event EventHandler OnCut;
     
@@ -32,7 +29,7 @@ public class CuttingCounter : BaseCounter
                 
                 var cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObjects().GetKitchenObjectSO());
 
-                OnCuttingProgressChanged?.Invoke(this,new OnProgressChangedEventArgs
+                OnCuttingProgressChanged?.Invoke(this,new IHasProgress.OnProgressChangedEventArgs
                 {
                     progressNormalized = (float)_cuttingProgress/cuttingRecipeSO.cuttingProgressMax
                 });
@@ -63,7 +60,7 @@ public class CuttingCounter : BaseCounter
             //this has a kitchen gameObject and it can be cut
             var cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObjects().GetKitchenObjectSO());
             
-            OnCuttingProgressChanged?.Invoke(this,new OnProgressChangedEventArgs
+            OnCuttingProgressChanged?.Invoke(this,new IHasProgress.OnProgressChangedEventArgs
             {
                 progressNormalized = (float)_cuttingProgress/cuttingRecipeSO.cuttingProgressMax
             });
