@@ -12,7 +12,7 @@ public interface IkitchenObjectParent
 
 
 
-    public KitchenObjects GetKitchenObjects ();
+    public KitchenObjects GetKitchenObject ();
 
 
 
