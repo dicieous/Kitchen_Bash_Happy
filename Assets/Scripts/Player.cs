@@ -7,6 +7,7 @@ public class Player : MonoBehaviour, IkitchenObjectParent
 {
     [SerializeField] private float moveSpeed = 8f;
     [SerializeField] private float rotSpeed = 18f;
+    
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask CounterlayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour, IkitchenObjectParent
 
     private KitchenObjects kitchenObject;
 
+    public event EventHandler OnPickingSOmething;
     public event EventHandler<OnselectedCounterChangedEventArgs> OnselectedCounterChanged;
 
     public class OnselectedCounterChangedEventArgs : EventArgs
@@ -178,6 +180,11 @@ public class Player : MonoBehaviour, IkitchenObjectParent
     public void SetKitchenObject(KitchenObjects kitchenObjects)
     {
         this.kitchenObject = kitchenObjects;
+
+        if (kitchenObject != null)
+        {
+            OnPickingSOmething?.Invoke(this,EventArgs.Empty);
+        }
     }
 
     public KitchenObjects GetKitchenObject()
