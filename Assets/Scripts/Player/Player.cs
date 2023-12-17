@@ -7,7 +7,7 @@ public class Player : MonoBehaviour, IkitchenObjectParent
 {
     [SerializeField] private float moveSpeed = 8f;
     [SerializeField] private float rotSpeed = 18f;
-    
+
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask CounterlayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
@@ -43,11 +43,13 @@ public class Player : MonoBehaviour, IkitchenObjectParent
     private void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
-        gameInput.OnInteractAlternateAction += GameInputOnOnInteractAction;
+        gameInput.OnInteractAlternateAction += GameInput_OnInteractActionAlternate;
     }
 
-    private void GameInputOnOnInteractAction(object sender, EventArgs e)
+    private void GameInput_OnInteractActionAlternate(object sender, EventArgs e)
     {
+        if (!GameManager.Instance.IsGamePlaying()) return;
+
         if (SelectedCounter != null)
         {
             SelectedCounter.InteractAlternate(this);
@@ -56,6 +58,8 @@ public class Player : MonoBehaviour, IkitchenObjectParent
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
+        if (!GameManager.Instance.IsGamePlaying()) return;
+        
         if (SelectedCounter != null)
         {
             SelectedCounter.Interact(this);
@@ -183,7 +187,7 @@ public class Player : MonoBehaviour, IkitchenObjectParent
 
         if (kitchenObject != null)
         {
-            OnPickingSOmething?.Invoke(this,EventArgs.Empty);
+            OnPickingSOmething?.Invoke(this, EventArgs.Empty);
         }
     }
 
