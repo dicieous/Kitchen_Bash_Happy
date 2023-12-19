@@ -14,7 +14,7 @@ public class CuttingCounter : BaseCounter,IHasProgress
     {
         OnAnyCut = null;
     }
-    public event EventHandler <IHasProgress.OnProgressChangedEventArgs> OnCuttingProgressChanged;
+    public event EventHandler <IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     
 
     public event EventHandler OnCut;
@@ -36,7 +36,7 @@ public class CuttingCounter : BaseCounter,IHasProgress
                 
                 var cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
-                OnCuttingProgressChanged?.Invoke(this,new IHasProgress.OnProgressChangedEventArgs
+                OnProgressChanged?.Invoke(this,new IHasProgress.OnProgressChangedEventArgs
                 {
                     progressNormalized = (float)_cuttingProgress/cuttingRecipeSO.cuttingProgressMax
                 });
@@ -75,7 +75,7 @@ public class CuttingCounter : BaseCounter,IHasProgress
             //this has a kitchen gameObject and it can be cut
             var cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
             
-            OnCuttingProgressChanged?.Invoke(this,new IHasProgress.OnProgressChangedEventArgs
+            OnProgressChanged?.Invoke(this,new IHasProgress.OnProgressChangedEventArgs
             {
                 progressNormalized = (float)_cuttingProgress/cuttingRecipeSO.cuttingProgressMax
             });
