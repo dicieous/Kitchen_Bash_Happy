@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IkitchenObjectParent
+public class Player : NetworkBehaviour, IkitchenObjectParent
 {
     [SerializeField] private float moveSpeed = 8f;
     [SerializeField] private float rotSpeed = 18f;
@@ -12,7 +13,7 @@ public class Player : MonoBehaviour, IkitchenObjectParent
     [SerializeField] private LayerMask CounterlayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
 
-    public static Player Instance { get; private set; }
+    //public static Player Instance { get; private set; }
 
     private bool isWalking;
 
@@ -32,18 +33,13 @@ public class Player : MonoBehaviour, IkitchenObjectParent
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Debug.LogError("There is more than one player");
-        }
-
-        Instance = this;
+        //Instance = this;
     }
 
     private void Start()
     {
-        gameInput.OnInteractAction += GameInput_OnInteractAction;
-        gameInput.OnInteractAlternateAction += GameInput_OnInteractActionAlternate;
+        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+        GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractActionAlternate;
     }
 
     private void GameInput_OnInteractActionAlternate(object sender, EventArgs e)
@@ -75,7 +71,7 @@ public class Player : MonoBehaviour, IkitchenObjectParent
 
     private void HandleInteractions()
     {
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
         Vector3 dirVec = new Vector3(inputVector.x, 0, inputVector.y);
 
 
@@ -110,7 +106,7 @@ public class Player : MonoBehaviour, IkitchenObjectParent
 
     private void HandleMovements()
     {
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
 
         //PlayerMovement
         Vector3 dirVec = new Vector3(inputVector.x, 0, inputVector.y);
