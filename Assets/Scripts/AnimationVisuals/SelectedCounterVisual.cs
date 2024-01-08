@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,38 +6,51 @@ using UnityEngine.Serialization;
 
 public class SelectedCounterVisual : MonoBehaviour
 {
-    [SerializeField]
-    private BaseCounter baseCounter;
-    [SerializeField]
-    private GameObject[] visualGameObjectArray;
+    [SerializeField] private BaseCounter baseCounter;
+    [SerializeField] private GameObject[] visualGameObjectArray;
 
     private void Start()
     {
-        //Player.Instance.OnselectedCounterChanged += Player_OnselectedCounterChanged;
+        if (Player.LocalInstance != null)
+        {
+            Player.LocalInstance.OnselectedCounterChanged += Player_OnselectedCounterChanged;
+        }
+        else
+        {
+            Player.OnAnyPlayerSpawned += OnAnyPlayerSpawned;
+        }
     }
 
-    private void Player_OnselectedCounterChanged (object sender, Player.OnselectedCounterChangedEventArgs e)
+    private void OnAnyPlayerSpawned(object sender, EventArgs e)
     {
-        if(e.selectedCounter == baseCounter)
+        if (Player.LocalInstance != null)
+        {
+            Player.LocalInstance.OnselectedCounterChanged -= Player_OnselectedCounterChanged;
+            Player.LocalInstance.OnselectedCounterChanged += Player_OnselectedCounterChanged;
+        }
+    }
+
+    private void Player_OnselectedCounterChanged(object sender, Player.OnselectedCounterChangedEventArgs e)
+    {
+        if (e.selectedCounter == baseCounter)
         {
             Show();
-        } else
+        }
+        else
         {
             Hide();
         }
     }
 
-    private void Show ()
+    private void Show()
     {
         foreach (var visualObj in visualGameObjectArray)
         {
             visualObj.SetActive(true);
-            
         }
-        
     }
 
-    private void Hide ()
+    private void Hide()
     {
         foreach (var visualObj in visualGameObjectArray)
         {

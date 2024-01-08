@@ -13,7 +13,7 @@ public class Player : NetworkBehaviour, IkitchenObjectParent
     [SerializeField] private LayerMask CounterlayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
 
-    //public static Player Instance { get; private set; }
+    public static Player LocalInstance { get; private set; }
 
     private bool isWalking;
 
@@ -23,23 +23,36 @@ public class Player : NetworkBehaviour, IkitchenObjectParent
 
     private KitchenObjects kitchenObject;
 
-    public event EventHandler OnPickingSOmething;
+    public static event EventHandler OnAnyPlayerSpawned;
+    public event EventHandler OnPickingSomething;
+    public static event EventHandler OnAnyPlayerPickSomething;
     public event EventHandler<OnselectedCounterChangedEventArgs> OnselectedCounterChanged;
+    
+    public static void ResetStaticData()
+    {
+        OnAnyPlayerSpawned = null;
+        OnAnyPlayerPickSomething = null;
+    }
+    
 
     public class OnselectedCounterChangedEventArgs : EventArgs
     {
         public BaseCounter selectedCounter;
     }
-
-    private void Awake()
-    {
-        //Instance = this;
-    }
-
+    
     private void Start()
     {
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
         GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractActionAlternate;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            LocalInstance = this;
+        }
+        OnAnyPlayerSpawned?.Invoke(this,EventArgs.Empty);
     }
 
     private void GameInput_OnInteractActionAlternate(object sender, EventArgs e)
@@ -64,6 +77,7 @@ public class Player : NetworkBehaviour, IkitchenObjectParent
 
     private void Update()
     {
+        if(!IsOwner) return;
         HandleInteractions();
 
         HandleMovements();
@@ -183,7 +197,8 @@ public class Player : NetworkBehaviour, IkitchenObjectParent
 
         if (kitchenObject != null)
         {
-            OnPickingSOmething?.Invoke(this, EventArgs.Empty);
+            OnPickingSomething?.Invoke(this, EventArgs.Empty);
+            OnAnyPlayerPickSomething?.Invoke(this,EventArgs.Empty); 
         }
     }
 
@@ -200,5 +215,10 @@ public class Player : NetworkBehaviour, IkitchenObjectParent
     public bool HasKitchenObject()
     {
         return kitchenObject != null;
+    }
+
+    public NetworkObject GetNetworkObject()
+    {
+        return NetworkObject;
     }
 }

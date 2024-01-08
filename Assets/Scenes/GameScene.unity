@@ -532,9 +532,75 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 44056529}
-    PlayerPrefab: {fileID: 2438032461809590266, guid: 9b3084b9468545a46aa23b668d5caeb6,
+    PlayerPrefab: {fileID: 4689376671578725535, guid: 9b3084b9468545a46aa23b668d5caeb6,
       type: 3}
-    NetworkPrefabs: []
+    NetworkPrefabs:
+    - Override: 0
+      Prefab: {fileID: 4736002116233902933, guid: 2bb81c876e8229a40aa9c80c57aa8939,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 7326009842485427517, guid: cee98b7e8ea1e204983885b87d00dc5d,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 4070757188984301081, guid: 75033352e4a547f44940647f23643efc,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 1595559467568409712, guid: c6c457e1f45a02b45b73105cda29eec7,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 4070757188984301081, guid: 801448130dfba444a92c95adbf3517aa,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 4766514264124503709, guid: 628b52db427772f4b82bb43b1f0500d3,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 4766514264124503709, guid: 454425c713e27374e9bd1a9b03108677,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 4766514264124503709, guid: 4421b6204652ec74b90ef766a7b3aebe,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 4070757188984301081, guid: 26a5f0a7efb1f3c4486189843ca538f9,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 4070757188984301081, guid: 7ec9b8bd83260a74aa62f7b17659a011,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 4070757188984301081, guid: df9c930bbf797f04e814b7c247d260d5,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
@@ -8314,7 +8380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee1b880b03fc73542bd051c5dd7cfca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePlayingTimerMax: 300
 --- !u!4 &1025270986
 Transform:
   m_ObjectHideFlags: 0
@@ -13065,6 +13130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1711403400}
   - component: {fileID: 1711403399}
+  - component: {fileID: 1711403401}
   m_Layer: 0
   m_Name: DeliveryManager
   m_TagString: Untagged
@@ -13100,6 +13166,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1711403401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711403398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2411029537
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!4 &1712461550 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2275174096627011412, guid: 354b6a40c84c7864e98a70102f092131,
@@ -13721,6 +13803,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1767162433}
   m_CullTransparentMesh: 1
+--- !u!1 &1778218386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1778218387}
+  - component: {fileID: 1778218389}
+  - component: {fileID: 1778218388}
+  m_Layer: 0
+  m_Name: KitchenGameMultiplayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1778218387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778218386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 27.967989, y: 39.085712, z: 42.33977}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778218388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778218386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3723314332
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &1778218389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778218386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a9a1ba3426de064db88d831f6e5537a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KitchenObjectsListSO: {fileID: 11400000, guid: 8c0b5856270849f41997a2a9a5b144e0,
+    type: 2}
 --- !u!1 &1804063613
 GameObject:
   m_ObjectHideFlags: 0
@@ -14846,9 +14991,9 @@ RectTransform:
   - {fileID: 1536773352}
   - {fileID: 2076215348}
   - {fileID: 2080396462}
-  - {fileID: 1552169370}
   - {fileID: 2035935866}
   - {fileID: 1686648456}
+  - {fileID: 1552169370}
   - {fileID: 1857527158}
   m_Father: {fileID: 0}
   m_RootOrder: 7

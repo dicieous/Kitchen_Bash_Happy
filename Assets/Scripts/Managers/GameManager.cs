@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
    
    private float countdownToStartTimer = 1f;
    private float gamePlayingTimer;
-   [SerializeField] private float gamePlayingTimerMax = 300f;
+   private float gamePlayingTimerMax = 300f;
 
    private bool isGamePaused = false;
 
@@ -38,10 +38,6 @@ public class GameManager : MonoBehaviour
    {
       GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
       GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
-      
-      //DEBUG TRIGGER GAME START AUTOMATICALLY
-      _state = State.CountdownToStart;
-      OnStateChanged?.Invoke(this,EventArgs.Empty);
    }
 
    private void GameInput_OnInteractAction(object sender, EventArgs e)
@@ -70,8 +66,8 @@ public class GameManager : MonoBehaviour
             countdownToStartTimer -= Time.deltaTime;
             if (countdownToStartTimer < 0)
             {
-               gamePlayingTimer = gamePlayingTimerMax;
                _state = State.GamePlaying;
+               gamePlayingTimer = gamePlayingTimerMax;
                OnStateChanged?.Invoke(this,EventArgs.Empty);
 
             }
@@ -102,6 +98,7 @@ public class GameManager : MonoBehaviour
 
    public bool IsCountDownToStartActive()
    {
+      //Debug.Log("Called Again" + _state);
       return _state == State.CountdownToStart;
    }
 

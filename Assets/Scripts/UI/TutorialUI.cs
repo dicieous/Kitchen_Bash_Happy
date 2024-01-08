@@ -23,17 +23,17 @@ public class TutorialUI : MonoBehaviour
     {
         GameInput.Instance.OnBindingRebind += GameInput_OnBindingRebind;
         GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
-        
+
         UpdateVisuals();
-        
+
         Show();
-        
     }
 
     private void GameManager_OnStateChanged(object sender, EventArgs e)
     {
         if (GameManager.Instance.IsCountDownToStartActive())
         {
+           // Debug.Log("Called");
             Hide();
         }
     }
@@ -49,23 +49,23 @@ public class TutorialUI : MonoBehaviour
         moveDownText.text = GameInput.Instance.GetBindingText(GameInput.Binding.MoveDown);
         moveLeftText.text = GameInput.Instance.GetBindingText(GameInput.Binding.MoveLeft);
         moveRightText.text = GameInput.Instance.GetBindingText(GameInput.Binding.MoveRight);
-        
+
         interactText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Interact);
         interactAlternateText.text = GameInput.Instance.GetBindingText(GameInput.Binding.InteractAlternate);
         pauseText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Pause);
-        
-        gamepadInteractText.text = GameInput.Instance.GetBindingText(GameInput.Binding.GamePadInteract);
-        gamePadInteractAlternateText.text = GameInput.Instance.GetBindingText(GameInput.Binding.GamePadInteractAlternate);
-        gamePadPauseText.text = GameInput.Instance.GetBindingText(GameInput.Binding.GamePadPause);
 
+        gamepadInteractText.text = GameInput.Instance.GetBindingText(GameInput.Binding.GamePadInteract);
+        gamePadInteractAlternateText.text =
+            GameInput.Instance.GetBindingText(GameInput.Binding.GamePadInteractAlternate);
+        gamePadPauseText.text = GameInput.Instance.GetBindingText(GameInput.Binding.GamePadPause);
     }
-    
+
     private void Show()
     {
         gameObject.SetActive(true);
     }
-    
-    
+
+
     private void Hide()
     {
         gameObject.SetActive(false);
